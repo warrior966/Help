@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101827">
+  <meta name="description" content="A clearly labeled demo of a college opportunity fundraising dashboard.">
+  <title>College Opportunity Fund — Demo</title>
+  <style>
+    :root{color-scheme:dark;--bg:#0b1220;--panel:#121d30;--panel2:#17253b;--text:#f4f7fb;--muted:#a9b7ca;--accent:#f5bd4f;--line:#293951;--green:#75d6a3}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0%,#1b3150 0,transparent 42%),var(--bg);color:var(--text);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+    .wrap{width:min(1080px,calc(100% - 36px));margin:auto}.top{padding:24px 0;display:flex;justify-content:space-between;align-items:center;gap:16px}.brand{font-weight:800;letter-spacing:.02em}.demo{font-size:.78rem;font-weight:800;letter-spacing:.09em;color:#1b2432;background:var(--accent);padding:7px 11px;border-radius:999px}
+    main{padding:46px 0 70px}.eyebrow{color:var(--accent);font-weight:750;text-transform:uppercase;letter-spacing:.14em;font-size:.78rem}
+    h1{font-size:clamp(2.3rem,6vw,4.7rem);line-height:1.03;letter-spacing:-.045em;max-width:800px;margin:15px 0 20px}
+    .lead{font-size:1.15rem;color:var(--muted);max-width:690px}.notice{margin:28px 0;padding:14px 17px;border:1px solid #80662e;background:#302718;border-radius:12px;color:#f8dfaa;font-size:.92rem}
+    .layout{display:grid;grid-template-columns:1.2fr .8fr;gap:20px;margin-top:34px}.card{background:linear-gradient(145deg,var(--panel),#101a2a);border:1px solid var(--line);border-radius:20px;padding:clamp(20px,4vw,32px);box-shadow:0 18px 55px #0002}
+    .amount{font-size:clamp(2.3rem,5vw,3.7rem);font-weight:850;letter-spacing:-.04em;margin:8px 0}.muted{color:var(--muted)}.progress-track{height:13px;border-radius:99px;background:#26364d;overflow:hidden;margin:20px 0 12px}.progress-fill{height:100%;width:0;background:linear-gradient(90deg,#e7a92f,#f6d27c);border-radius:99px;transition:width .35s ease}
+    .stats{display:flex;justify-content:space-between;gap:16px;font-size:.92rem}.stat strong{display:block;color:var(--text);font-size:1.15rem}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:25px}.actions button{border:1px solid #425674;background:var(--panel2);color:var(--text);padding:11px 16px;border-radius:11px;font:inherit;font-weight:750;cursor:pointer}.actions button:hover{border-color:var(--accent);transform:translateY(-1px)}.actions button.primary{background:var(--accent);color:#1c2430;border-color:var(--accent)}button:focus-visible{outline:3px solid #fff;outline-offset:3px}
+    .feed{list-style:none;padding:0;margin:18px 0 0}.feed li{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.feed li:last-child{border:0}.feed b{color:var(--green)}.empty{color:var(--muted);font-size:.94rem;padding:12px 0}
+    .impact{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}.impact div{background:#ffffff08;border:1px solid var(--line);border-radius:14px;padding:16px}.impact strong{display:block;color:var(--accent);font-size:1.35rem}.impact span{font-size:.85rem;color:var(--muted)}
+    footer{border-top:1px solid var(--line);padding:22px 0 35px;color:var(--muted);font-size:.85rem}
+    @media(max-width:760px){.layout{grid-template-columns:1fr}.top{align-items:flex-start}.impact{grid-template-columns:1fr}.stats{flex-wrap:wrap}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <header class="wrap top"><div class="brand">OPEN DOORS <span class="muted">/ EDUCATION</span></div><span class="demo">SIMULATION ONLY</span></header>
+  <main class="wrap">
+    <div class="eyebrow">A brighter future starts with opportunity</div>
+    <h1>Help open the door to college.</h1>
+    <p class="lead">A concept campaign supporting the next generation of college students with access to education, guidance, and opportunity.</p>
+    <div class="notice"><strong>Demo notice:</strong> This page is a front-end simulation. Donation buttons do not collect money, no payments are processed, and all amounts and donor activity shown here are fictional.</div>
+    <section class="layout" aria-label="Fundraising dashboard">
+      <article class="card">
+        <div class="eyebrow">Demo campaign progress</div>
+        <div class="amount" id="raised" aria-live="polite">$0</div>
+        <div class="muted">simulated toward a goal of <strong id="goalLabel">$100,000</strong></div>
+        <div class="progress-track" role="progressbar" aria-label="Simulated fundraising progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="stats"><div class="stat"><strong id="percent">0%</strong><span class="muted">of demo goal</span></div><div class="stat"><strong id="supporters">0</strong><span class="muted">simulated supporters</span></div><div class="stat"><strong id="remaining">$100,000</strong><span class="muted">remaining</span></div></div>
+        <div class="actions" aria-label="Simulate a donation">
+          <button class="primary" data-amount="25">Add $25</button><button data-amount="50">Add $50</button><button data-amount="100">Add $100</button><button data-amount="250">Add $250</button>
+        </div>
+        <p class="muted" style="font-size:.83rem;margin:15px 0 0">Choose an amount to add fictional activity to this demo. Refreshing the page resets the simulation.</p>
+      </article>
+      <aside class="card">
+        <div class="eyebrow">Recent demo activity</div>
+        <h2 style="margin:8px 0 0;font-size:1.4rem">Latest supporters</h2>
+        <ul class="feed" id="feed" aria-live="polite"><li class="empty">No simulated donations yet. Add one to see it here.</li></ul>
+      </aside>
+    </section>
+    <section class="card" style="margin-top:20px">
+      <div class="eyebrow">Why college access matters</div>
+      <h2 style="margin:8px 0 10px">Invest in potential, expand possibilities.</h2>
+      <p class="muted" style="margin:0;max-width:800px">This concept is inspired by the broader idea behind LeBron James’ support for college access, including his 2015 commitment to provide University of Akron scholarships for eligible graduates of the I PROMISE program. This independent demo is not operated by, endorsed by, or affiliated with LeBron James, the LeBron James Family Foundation, the University of Akron, or the I PROMISE program.</p>
+      <div class="impact"><div><strong>Access</strong><span>Make pathways to higher education easier to navigate.</span></div><div><strong>Support</strong><span>Connect students with guidance and resources.</span></div><div><strong>Opportunity</strong><span>Help more young people plan for what comes next.</span></div></div>
+    </section>
+  </main>
+  <footer><div class="wrap">College Opportunity Fund — independent educational demo. No real fundraising takes place on this website.</div></footer>
+  <script>
+    // CONFIGURATION: change this value to set the fundraising goal shown in the demo.
+    const GOAL_AMOUNT = 100000;
+    let simulatedRaised = 0;
+    let simulatedSupporters = 0;
+    const money = value => new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(value);
+    const raisedEl = document.getElementById('raised');
+    const goalEl = document.getElementById('goalLabel');
+    const percentEl = document.getElementById('percent');
+    const supportersEl = document.getElementById('supporters');
+    const remainingEl = document.getElementById('remaining');
+    const fillEl = document.getElementById('progressFill');
+    const barEl = document.getElementById('progressBar');
+    const feedEl = document.getElementById('feed');
+    goalEl.textContent = money(GOAL_AMOUNT);
+    remainingEl.textContent = money(GOAL_AMOUNT);
+    function render(){
+      const pct = GOAL_AMOUNT > 0 ? Math.min(100,simulatedRaised/GOAL_AMOUNT*100) : 0;
+      raisedEl.textContent = money(simulatedRaised);
+      percentEl.textContent = Math.floor(pct) + '%';
+      supportersEl.textContent = simulatedSupporters;
+      remainingEl.textContent = money(Math.max(0,GOAL_AMOUNT-simulatedRaised));
+      fillEl.style.width = pct + '%';
+      barEl.setAttribute('aria-valuenow',String(Math.round(pct)));
+    }
+    document.querySelectorAll('[data-amount]').forEach(button=>{
+      button.addEventListener('click',()=>{
+        const amount = Number(button.dataset.amount);
+        simulatedRaised += amount;
+        simulatedSupporters += 1;
+        const item = document.createElement('li');
+        const name = ['Alex M.','Jordan K.','Taylor R.','Casey W.','Morgan D.'][Math.floor(Math.random()*5)];
+        const person = document.createElement('span');
+        person.textContent = name + ' · Demo supporter';
+        const value = document.createElement('b');
+        value.textContent = '+' + money(amount);
+        item.append(person,value);
+        if(feedEl.querySelector('.empty')) feedEl.replaceChildren();
+        feedEl.prepend(item);
+        while(feedEl.children.length>5) feedEl.lastElementChild.remove();
+        render();
+      });
+    });
+    render();
+  </script>
+</body>
+</html>
